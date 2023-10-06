@@ -17,7 +17,13 @@ There are 2 deployment modes for MinIO.
 - Distributed
 
 ### Deploy a single environment
-> WIP
+
+Before you can deploy MinIO, you need to have a Docker Swarm Cluster up and running with at least 1 or more nodes.
+
+> [!NOTE]
+> Placements constraints & preferences are used to ensure that only one replica is deployed per node.
+
+See `docker-compose.single.yml` as an example.
 
 ### Deploy a distributed environment
 
@@ -26,6 +32,11 @@ Before you can deploy MinIO, you need to have a Docker Swarm Cluster up and runn
 There are some decisions you need to make before deploying MinIO.
 - How many MinIO instances do you want to deploy?
 - How much storage do you want to allocate to each instance?
+
+> [!NOTE]
+> Placements constraints & preferences are used to ensure that the servers are spread evenly across the nodes and only one replica is deployed per node.
+
+See `docker-compose.distributed.yml` as an example.
 
 ### Deploy a test environment
 > WIP
