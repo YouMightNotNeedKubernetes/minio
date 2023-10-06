@@ -3,7 +3,7 @@ Docker Stack deployment for MinIO Object Storage.
 
 It supports both single and distributed deployments. It uses Docker volumes to store the data. And ensure the server is spread evenly across the nodes.
 
-> [!NOTE]
+> [!IMPORTANT]
 > Use this as a starting point for your own deployment. It is not recommended to use this in production as it only provides as simple deployment strategies.
 
 ## Getting Started
