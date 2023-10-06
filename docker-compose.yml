@@ -39,7 +39,7 @@ services:
     logging: *default-logging
 
   ingress:
-    image: nginx:stable-alpine
+    image: nginx:${NGINX_VERSION:-stable-alpine}
     networks:
       - minio
     ports:
@@ -60,12 +60,13 @@ networks:
   minio:
 
 configs:
+  # Minio configuration
   minio.env:
-    name: minio_config.env
+    name: minio_config-v${REVISION:-1.0}.env
     file: services/minio/config.env
   # Ingress configuration
   default.conf.template:
-    name: minio_nginx_default.conf.template
+    name: minio_nginx_default-v${REVISION:-1.0}.conf.template
     file: services/nginx/default.conf.template
   nginx_startup-delay.sh:
     name: minio_nginx_startup-delay.sh

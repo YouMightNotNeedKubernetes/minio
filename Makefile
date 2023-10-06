@@ -3,6 +3,9 @@ mode := distributed
 service_replicas := 3
 compose_files := -c docker-compose.yml -c docker-compose.${mode}.yml
 
+-include .env.default
+-include .env
+
 it:
 	@echo "make mode=$(mode) [deploy|destroy]"
 
