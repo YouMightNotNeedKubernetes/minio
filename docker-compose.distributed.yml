@@ -7,7 +7,9 @@ services:
       - "server"
       - "--console-address"
       - ":9001"
-      - "http://minio-{1...${MINIO_REPLICAS:-3}}:9000/data"
+      - "http://minio-{1...${MINIO_REPLICAS:-3}}:9000/data1"
+    volumes:
+      - minio-data-1:/data1
     deploy:
       replicas: ${MINIO_REPLICAS:-3}
       placement:
@@ -26,3 +28,8 @@ services:
           - node.labels.minio == true
         preferences:
           - spread: "node.labels.minio"
+
+volumes:
+  minio-data-1:
+    name: minio-data-1
+    external: true

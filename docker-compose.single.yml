@@ -3,7 +3,9 @@
 # ----------------------------------
 services:
   minio:
-    command: server --console-address ":9001" /data
+    command: server --console-address ":9001" /data1
+    volumes:
+      - minio-data-1:/data1
     deploy:
       replicas: 1
       placement:
@@ -22,3 +24,8 @@ services:
           - node.labels.minio == true
         preferences:
           - spread: "node.labels.minio"
+
+volumes:
+  minio-data-1:
+    name: minio-data-1
+    external: true

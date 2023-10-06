@@ -27,8 +27,6 @@ services:
       - minio
     environment:
       MINIO_CONFIG_ENV_FILE: /minio/config.env
-    volumes:
-      - minio-data:/data
     configs:
       - source: minio.env
         target: /minio/config.env
@@ -60,11 +58,6 @@ services:
 
 networks:
   minio:
-
-volumes:
-  minio-data:
-    name: minio-data
-    external: true
 
 configs:
   minio.env:
