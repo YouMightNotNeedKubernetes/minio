@@ -1,0 +1,28 @@
+# ----------------------------------
+# MinIO Distributed Deployment
+# ----------------------------------
+services:
+  minio:
+    command: 
+      - "server"
+      - "--console-address"
+      - ":9001"
+      - "http://minio-{1...${MINIO_REPLICAS:-3}}:9000/data"
+    deploy:
+      replicas: ${MINIO_REPLICAS:-3}
+      placement:
+        max_replicas_per_node: 1
+        constraints:
+          - node.labels.minio == true
+        preferences:
+          - spread: "node.labels.minio"
+
+  ingress:
+    deploy:
+      replicas: ${MINIO_INGRESS_REPLICAS:-3}
+      placement:
+        max_replicas_per_node: 1
+        constraints:
+          - node.labels.minio == true
+        preferences:
+          - spread: "node.labels.minio"

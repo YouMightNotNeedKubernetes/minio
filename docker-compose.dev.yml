@@ -1,0 +1,12 @@
+# ----------------------------------
+# MinIO Development Deployment
+# ----------------------------------
+services:
+  minio:
+    command: server --console-address ":9001" /data
+    deploy:
+      replicas: 1
+
+  ingress:
+    deploy:
+      replicas: 1
