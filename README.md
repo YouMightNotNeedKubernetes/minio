@@ -38,9 +38,6 @@ There are some decisions you need to make before deploying MinIO.
 
 See `docker-compose.distributed.yml` as an example.
 
-### Deploy a test environment
-> WIP
-
 ## IMPORTANT
 
 ### Server placement
