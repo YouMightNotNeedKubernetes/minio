@@ -27,10 +27,16 @@ There are some decisions you need to make before deploying MinIO.
 
 ## IMPORTANT
 
-This stack uses the `local` driver for the volumes. This means that the data will be stored on the local node. If you want to use a different driver, you need to create a volume name `minio-data` with the driver you want to use.
+This stack uses the `local` driver for the volumes by default. This means that the data will be stored on the local node.
 
+If you want to use a different driver, you need to create a volume name `minio-data` with the driver you want to use.
+
+Here is an example of creating a volume with the `local` driver:
 ```sh
-docker volume create --driver <driver> minio-data
+# You can specify the driver with the --driver local flag or omit it as it is the default driver.
+docker volume create minio-data
 ```
+
+> See https://docs.docker.com/engine/reference/commandline/volume_create/ for more information.
 
 If you wish to share data between machines, read here [Share data between machines](https://docs.docker.com/storage/volumes/#share-data-between-machines).
