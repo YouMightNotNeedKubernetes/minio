@@ -19,7 +19,7 @@ services:
 
   ingress:
     deploy:
-      replicas: ${MINIO_INGRESS_REPLICAS:-3}
+      replicas: ${MINIO_REPLICAS:-3}
       placement:
         max_replicas_per_node: 1
         constraints:
