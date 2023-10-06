@@ -39,6 +39,22 @@ The deployment uses both placement **constraints** & **preferences** to ensure t
 
 > See https://docs.docker.com/engine/swarm/services/#control-service-placement for more information.
 
+#### List the nodes
+On the manager node, run the following command to list the nodes in the cluster.
+
+```sh
+docker node ls
+```
+
+#### Add the label to the node
+On the manager node, run the following command to add the label to the node.
+
+Repeat this step for each node you want to deploy MinIO to.
+
+```sh
+docker node update --label-add minio=true <node-name>
+```
+
 ### Storage
 
 This stack uses the `local` driver for the volumes by default. This means that the data will be stored on the local node.
