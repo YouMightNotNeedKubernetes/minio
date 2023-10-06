@@ -29,6 +29,9 @@ services:
       MINIO_CONFIG_ENV_FILE: /minio/config.env
     volumes:
       - minio-data:/data
+    configs:
+      - source: minio.env
+        target: /minio/config.env
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
       interval: 30s
@@ -64,6 +67,9 @@ volumes:
     external: true
 
 configs:
+  minio.env:
+    name: minio_config.env
+    file: services/minio/config.env
   # Ingress configuration
   default.conf.template:
     name: minio_nginx_default.conf.template
