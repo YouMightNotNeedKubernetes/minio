@@ -21,7 +21,7 @@ x-default-logging: &default-logging
 
 services:
   minio:
-    image: quay.io/minio/minio:${MINIO_VERSION:-latest}
+    image: minio/minio:${MINIO_VERSION:-latest}
     hostname: minio-{{.Task.Slot}}
     networks:
       - minio
