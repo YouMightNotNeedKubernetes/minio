@@ -21,9 +21,9 @@ Here are some useful tips to help you plan your deployment.
 
 ### Server placement
 
-A `node.labels.minio` label is used to determine which nodes the MinIO server can be deployed on.
+A `node.labels.minio` label is used to determine which nodes the service can be deployed on.
 
-The deployment uses both placement **constraints** & **preferences** to ensure that the servers are spread evenly across the nodes and only **ALLOW** one replica per node.
+The deployment uses both placement **constraints** & **preferences** to ensure that the servers are spread evenly across the Docker Swarm manager nodes and only **ALLOW** one replica per node.
 
 ![placement_prefs](https://docs.docker.com/engine/swarm/images/placement_prefs.png)
 
@@ -39,10 +39,13 @@ docker node ls
 #### Add the label to the node
 On the manager node, run the following command to add the label to the node.
 
-Repeat this step for each node you want to deploy MinIO to.
+Repeat this step for each node you want to deploy the service to. Make sure that the number of node updated matches the number of replicas you want to deploy.
 
+**Example deploy service with 3 replicas**:
 ```sh
-docker node update --label-add minio=true <node-name>
+docker node update --label-add minio=true <node-1>
+docker node update --label-add minio=true <node-2>
+docker node update --label-add minio=true <node-3>
 ```
 
 ### Storage
