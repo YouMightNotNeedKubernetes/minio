@@ -1,10 +1,14 @@
+-include .env.default
+-include .env
+
 docker_stack_name := minio
 mode := distributed
 service_replicas := 3
 compose_files := -c docker-compose.yml -c docker-compose.${mode}.yml
 
--include .env.default
--include .env
+ifneq ("$(wildcard docker-compose.override.yml)","")
+	compose_files += -c docker-compose.override.yml
+endif
 
 it:
 	@echo "make mode=$(mode) [deploy|destroy]"
