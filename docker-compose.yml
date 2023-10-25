@@ -19,6 +19,19 @@ x-default-logging: &default-logging
     max-file: "5"
   driver: json-file
 
+networks:
+  minio:
+
+configs:
+  # Minio configuration
+  minio.env:
+    file: services/minio/config.env
+  # Ingress configuration
+  default.conf.template:
+    file: services/nginx/default.conf.template
+  nginx_startup-delay.sh:
+    file: services/nginx/startup-delay.sh
+
 services:
   minio:
     image: minio/minio:${MINIO_VERSION:-latest}
@@ -39,12 +52,12 @@ services:
     logging: *default-logging
 
   ingress:
-    image: nginx:${NGINX_VERSION:-stable-alpine}
+    image: nginx:${MINIO_NGINX_VERSION:-stable-alpine}
     networks:
       - minio
     ports:
-      - 9000:9000
-      - 9001:9001
+      - ${MINIO_PORT:-9000}:9000
+      - ${MINIO_CONSOLE_PORT:-9001}:9001
     configs:
       - source: default.conf.template
         target: /etc/nginx/templates/default.conf.template
@@ -55,19 +68,3 @@ services:
       - minio
     deploy: *default-deploy
     logging: *default-logging
-
-networks:
-  minio:
-
-configs:
-  # Minio configuration
-  minio.env:
-    name: minio_config-v${REVISION:-1.0}.env
-    file: services/minio/config.env
-  # Ingress configuration
-  default.conf.template:
-    name: minio_nginx_default-v${REVISION:-1.0}.conf.template
-    file: services/nginx/default.conf.template
-  nginx_startup-delay.sh:
-    name: minio_nginx_startup-delay.sh
-    file: services/nginx/startup-delay.sh
