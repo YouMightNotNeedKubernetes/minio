@@ -43,11 +43,11 @@ services:
     configs:
       - source: minio.env
         target: /minio/config.env
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+    #   interval: 30s
+    #   timeout: 20s
+    #   retries: 3
     deploy: *default-deploy
     logging: *default-logging
 
